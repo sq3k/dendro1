@@ -1,4 +1,4 @@
-package dentaku.src;
+//package dentaku.src;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -19,7 +19,7 @@ public class Dentaku extends javax.swing.JFrame{
        this.setContentPane(contentPane);
        contentPane.add(result,BorderLayout.NORTH);//テキストフィールドを配置
        JPanel keyPanel=new JPanel();//ボタンを配置するパネルを用意
-              keyPanel.setLayout(new GridLayout(5,4));//4行4列のGridLayoutにする
+       keyPanel.setLayout(new GridLayout(5,4));//5行4列のGridLayoutにする
        contentPane.add(keyPanel,BorderLayout.CENTER);
        keyPanel.add(new JButton("de"),0);
        keyPanel.add(new JButton(" "),1);
@@ -29,7 +29,7 @@ public class Dentaku extends javax.swing.JFrame{
        keyPanel.add(new JButton("7"),4);
        keyPanel.add(new JButton("8"),5);
        keyPanel.add(new JButton("9"),6);
-       keyPanel.add(new JButton("×"),7);
+       keyPanel.add(new JButton("x"),7);
 
        keyPanel.add(new JButton("4"),8);
        keyPanel.add(new JButton("5"),9);
@@ -49,10 +49,27 @@ public class Dentaku extends javax.swing.JFrame{
        
        
        this.setVisible(true);
-
-       
     }
-    
+/* 
+    /*テキストフィールドに引数の文字列を繋げる 
+    public void apppendResult(String c){
+      result.setText(result.getText()+c);
+    }
 
-  }
+    /*数字を入力するボタンの定義 
+    public class NumberButton extends JButton implements ActionListener{
+      private static final long serialVersionUID = 1L;
+      public NumberButton(String keyTop){
+         super(keyTop);//JButtonクラスのコンストラクタを呼び出す
+         this.addActionListener(this);//このボタンにアクションイベントのリスナを設定
+      }
+
+      public void actionaPerformed(ActionEvent evt){
+         String keyNumber=this.getText();//ボタンの名前を取り出す
+         appendResult(keyNumber);//ボタンの名前をテキストフィールドにつなげる
+      }
+      */
+    }
+   
+  
 
