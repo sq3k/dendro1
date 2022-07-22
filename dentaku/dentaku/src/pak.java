@@ -19,33 +19,40 @@ public class pak extends JFrame {
         public pak() {
             contentPane.setLayout(borderLayout1);
             this.setSize(new Dimension(250, 300));
-            this.setTitle("電子式卓上計算機");
+            this.setTitle("電卓");
             this.setContentPane(contentPane);
     
             contentPane.add(result, BorderLayout.NORTH); //テキストフィールドを配置
     
             JPanel keyPanel = new JPanel(); //ボタンを配置するパネルを用意
-            keyPanel.setLayout(new GridLayout(4, 4)); //4行4列のGridLayoutにする
+            keyPanel.setLayout(new GridLayout(5, 4)); //4行4列のGridLayoutにする
             contentPane.add(keyPanel, BorderLayout.CENTER);
     
-            keyPanel.add(new NumberButton("7"), 0); //ボタンをレイアウトにはめこんでいく
-            keyPanel.add(new NumberButton("8"), 1);
-            keyPanel.add(new NumberButton("9"), 2);
-            keyPanel.add(new CalcButton("÷"), 3);
-            keyPanel.add(new NumberButton("4"), 4);
-            keyPanel.add(new NumberButton("5"), 5);
-            keyPanel.add(new NumberButton("6"), 6);
-            keyPanel.add(new CalcButton("×"), 7);
-            keyPanel.add(new NumberButton("1"), 8);
-            keyPanel.add(new NumberButton("2"), 9);
-            keyPanel.add(new NumberButton("3"), 10);
-            keyPanel.add(new CalcButton("－"), 11);
-            keyPanel.add(new NumberButton("0"), 12);
-            keyPanel.add(new NumberButton("."), 13);
-            keyPanel.add(new CalcButton("＋"), 14);
-            keyPanel.add(new CalcButton("＝"), 15);
+            keyPanel.add(new ClearButton(),0);
+       keyPanel.add(new JButton(" "),1);
+       keyPanel.add(new JButton(" "),2);
+       keyPanel.add(new CalcButton("÷"),3);
+
+       keyPanel.add(new NumberButton("7"),4);
+       keyPanel.add(new NumberButton("8"),5);
+       keyPanel.add(new NumberButton("9"),6);
+       keyPanel.add(new CalcButton("×"),7);
+
+       keyPanel.add(new NumberButton("4"),8);
+       keyPanel.add(new NumberButton("5"),9);
+       keyPanel.add(new NumberButton("6"),10);
+       keyPanel.add(new CalcButton("-"),11);
+
+       keyPanel.add(new NumberButton("1"),12);
+       keyPanel.add(new NumberButton("2"),13);
+       keyPanel.add(new NumberButton("3"),14);
+       keyPanel.add(new CalcButton("+"),15);
     
-            contentPane.add(new ClearButton(), BorderLayout.SOUTH);//Cボタンを配置する
+ 
+       keyPanel.add(new NumberButton("0"),16);
+       keyPanel.add(new JButton(" "),17);
+       keyPanel.add(new JButton(" "),18);
+       keyPanel.add(new CalcButton("="),19);
             this.setVisible(true);
         }
     
@@ -87,11 +94,11 @@ public class pak extends JFrame {
                 if (isStacked) { //以前に演算子ボタンが押されたのなら計算結果を出す
                     double resultValue = (Double.valueOf(result.getText()))
                             .doubleValue();
-                    if (currentOp.equals("＋")) //演算子に応じて計算する
+                    if (currentOp.equals("+")) //演算子に応じて計算する
                         stackedValue += resultValue;
-                    else if (currentOp.equals("－"))
+                    else if (currentOp.equals("-"))
                         stackedValue -= resultValue;
-                    else if (currentOp.equals("×"))
+                    else if (currentOp.equals("x"))
                         stackedValue *= resultValue;
                     else if (currentOp.equals("÷"))
                         stackedValue /= resultValue;
@@ -100,7 +107,7 @@ public class pak extends JFrame {
                 currentOp = this.getText(); //ボタン名から押されたボタンの演算子を取り出す
                 stackedValue = (Double.valueOf(result.getText())).doubleValue();
                 afterCalc = true;
-                if (currentOp.equals("＝"))
+                if (currentOp.equals("="))
                     isStacked = false;
                 else
                     isStacked = true;
@@ -113,7 +120,7 @@ public class pak extends JFrame {
             private static final long serialVersionUID = 1L;
     
             public ClearButton() {
-                super("C");
+                super("de");
                 this.addActionListener(this);
             }
     
