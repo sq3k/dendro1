@@ -9,7 +9,7 @@ public class Dentaku extends javax.swing.JFrame{
     private static final long serialVersionUID=1L;
     JPanel contentPane=new JPanel();
     BorderLayout borderLayout1=new BorderLayout();
-    JTextField result=new JTextField("");//計算結果を表示するテキストフィールド
+    JTextField result=new JTextField("0");//計算結果を表示するテキストフィールド
     double stackedValue = 0.0; //演算子ボタンを押す前にテキストフィールドにあった値
 	 boolean isStacked = false; //stackedValueに数値を入力したかどうか
 	 boolean afterCalc = false; //演算子ボタンを押した後かどうか
@@ -58,17 +58,22 @@ public class Dentaku extends javax.swing.JFrame{
 public void appendResult(String c) {
    String str="null";
    String ze = "0";
+   String error="エラー";
    if (!afterCalc) {//演算子ボタンを押した直後でないなら
       if(!str.equals(result.getText()) ){
         if(ze.equals(result.getText())){
            result.setText(c);
            afterCalc=false;
         }
+        else if(error.equals(result.getText())){
+         afterCalc=true;
+        }
         else{
 		  result.setText(result.getText() + c); //押したボタンの名前をつなげる
         afterCalc=false;
         }
       }
+
    }
 	else {
 		result.setText(c); //押したボタンの文字列だけを設定する（いったんクリアしたかに見える）
@@ -104,15 +109,22 @@ public class CalcButton extends JButton implements ActionListener {
       if (isStacked) { //以前に演算子ボタンが押されたのなら計算結果を出す
          double resultValue = (Double.valueOf(result.getText()))
                .doubleValue();
-         if (currentOp.equals("+")) //演算子に応じて計算する
+         if (currentOp.equals("+")) {//演算子に応じて計算する
+            result.setText("");
             stackedValue += resultValue;
+         }
          else if (currentOp.equals("-"))
             stackedValue -= resultValue;
          else if (currentOp.equals("x"))
             stackedValue *= resultValue;
-         else if (currentOp.equals("÷"))
+         else if (currentOp.equals("÷")){
             stackedValue /= resultValue;
+         }
+         if(currentOp.equals("÷") && resultValue==0)
+           result.setText("エラー");
+         else{
          result.setText(String.valueOf(stackedValue)); //計算結果をテキストフィールドに設定
+         }
       }
       currentOp = this.getText(); //ボタン名から押されたボタンの演算子を取り出す
       stackedValue = (Double.valueOf(result.getText())).doubleValue();
@@ -130,7 +142,7 @@ public class ClearButton extends JButton implements ActionListener {
    private static final long serialVersionUID = 1L;
 
    public ClearButton() {
-      super("C");
+      super("de");
       this.addActionListener(this);
    }
 
@@ -138,7 +150,7 @@ public class ClearButton extends JButton implements ActionListener {
       stackedValue = 0.0;
       afterCalc = false;
       isStacked = false;
-      result.setText("");
+      result.setText("0");
    }
 
 }
